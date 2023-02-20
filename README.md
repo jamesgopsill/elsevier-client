@@ -17,9 +17,12 @@ You can then use in your code:
 ```typescript
 import { ElsevierClient } from "@jamesgopsill/elsevier-client"
 
-const c = new ElsevierClient()
+const c = new ElsevierClient("API_KEY")
 
-
+const r = await c.abstract("doi", "10.1016/S0014-5793(01)03313-0")
+if (r.ok && r.status == 200) {
+	console.log(r.content)
+}
 ```
 
 **Javascript (CJS)**
@@ -27,7 +30,10 @@ const c = new ElsevierClient()
 ```javascript
 const { ElsevierClient } = require("@jamesgopsill/elsevier-client")
 
-const c = new ElsevierClient()
+const c = new ElsevierClient("API_KEY")
+if (r.ok && r.status == 200) {
+	console.log(r.content)
+}
 ```
 
 ## Client Docs

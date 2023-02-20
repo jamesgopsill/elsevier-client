@@ -4,7 +4,7 @@ import { auth } from "./test.config.js"
 let c: ElsevierClient
 
 beforeAll(() => {
-	c = new ElsevierClient(auth.apiKey, auth.insttoken)
+	c = new ElsevierClient(auth.apiKey)
 })
 
 test(`ping`, () => {

@@ -5,19 +5,20 @@ export async function fetchIt<T>(
 	this: ElsevierClient,
 	method: "GET",
 	url: string,
-	params: { [k: string]: any } | undefined = undefined
+	params: { [k: string]: any } = {}
 ) {
 	let config: any = {
 		method,
 		mode: "cors",
-		headers: {},
+		headers: {
+			Accept: "application/json",
+		},
 	}
 
-	if (this._apiKey) config.headers["X-ELS-APIKey"] = this._apiKey
-	if (this._insttoken) config.headers["X-ELS-Insttoken"] = this._insttoken
-	if (this._accessToken) config.headers["X-ELS-AccessToken"] = this._accessToken
+	if (this._apiKey) params["apiKey"] = this._apiKey
+	if (this._insttoken) params["insttoken"] = this._insttoken
 
-	if (method === "GET" && typeof params === "object") {
+	if (typeof params === "object") {
 		url += "?"
 		for (const [k, v] of Object.entries(params)) {
 			url += k + "=" + v + "&"
@@ -26,18 +27,16 @@ export async function fetchIt<T>(
 		url = encodeURI(url)
 	}
 
-	console.log(config)
+	//console.log(url)
 
 	const request = new Request(url, config)
 
 	const r = (await fetch(request)) as HttpResponse<T>
 	r.content = undefined
-	if (r.ok && r.status === 200) {
-		if (r.headers.get("Content-Type")?.includes("application/json")) {
-			let content = await r.json()
-			parseDates(content)
-			r.content = content
-		}
+	if (r.headers.get("Content-Type")?.includes("application/json")) {
+		let content = await r.json()
+		parseDates(content)
+		r.content = content
 	}
 	return r
 }
