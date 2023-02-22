@@ -3,6 +3,7 @@ import * as Retrieval from "./endpoints/retrieval.js"
 import * as Search from "./endpoints/search.js"
 import { fetchIt } from "./fetch-it.js"
 
+export * from "./definitions/auto-generated.js"
 export * from "./definitions/enums.js"
 export * from "./definitions/interfaces.js"
 

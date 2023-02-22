@@ -1,10 +1,10 @@
 import type {
 	ElsevierClient,
 	EngineeringVillageSearchQueryParams,
-	ScopusSearchResults,
 	SearchAffiliationResponse,
 	SearchAuthorResponse,
 	SearchEngineeringVillageResponse,
+	SearchScienceDirectResponse,
 	SearchScopusResponse,
 } from "../index.js"
 
@@ -16,7 +16,9 @@ import type {
  */
 export async function searchAffiliation(this: ElsevierClient, query: string) {
 	const url = `${this._url}/search/affiliation`
-	return this._fetch<SearchAffiliationResponse>("GET", url, { query })
+	return this._fetch<SearchAffiliationResponse.RootObject>("GET", url, {
+		query,
+	})
 }
 
 /**
@@ -27,7 +29,7 @@ export async function searchAffiliation(this: ElsevierClient, query: string) {
  */
 export async function searchAuthor(this: ElsevierClient, query: string) {
 	const url = `${this._url}/search/author`
-	return this._fetch<SearchAuthorResponse>("GET", url, { query })
+	return this._fetch<SearchAuthorResponse.RootObject>("GET", url, { query })
 }
 
 /**
@@ -41,7 +43,9 @@ export async function searchEngineeringVillage(
 	query: EngineeringVillageSearchQueryParams
 ) {
 	const url = `${this._url}/ev/results`
-	return this._fetch<SearchEngineeringVillageResponse>("GET", url, { query })
+	return this._fetch<SearchEngineeringVillageResponse.RootObject>("GET", url, {
+		query,
+	})
 }
 
 /**
@@ -52,7 +56,9 @@ export async function searchEngineeringVillage(
  */
 export async function searchScienceDirect(this: ElsevierClient, query: string) {
 	const url = `${this._url}/search/sciencedirect`
-	return this._fetch<SearchScopusResponse>("GET", url, { query })
+	return this._fetch<SearchScienceDirectResponse.RootObject>("GET", url, {
+		query,
+	})
 }
 
 /**
@@ -63,5 +69,5 @@ export async function searchScienceDirect(this: ElsevierClient, query: string) {
  */
 export async function searchScopus(this: ElsevierClient, query: string) {
 	const url = `${this._url}/search/scopus`
-	return this._fetch<ScopusSearchResults>("GET", url, { query })
+	return this._fetch<SearchScopusResponse.RootObject>("GET", url, { query })
 }

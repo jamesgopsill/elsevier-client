@@ -1,6 +1,7 @@
 node_modules/
 docs/
 dist/
+scratch/
 
 *.tsbuildinfo
 .DS_Store

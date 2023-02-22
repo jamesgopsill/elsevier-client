@@ -1,8 +1,12 @@
 import type {
 	AbstractRetrievalResponse,
+	AffiliationRetrievalResponse,
+	ArticleEntitlementRetrievalResponse,
+	ArticleRetrievalResponse,
 	AuthorRetrievalResponse,
 	ElsevierClient,
-	EntitlementResponse,
+	EngineeringVillageRecordRetrievalResponse,
+	ObjectRetrievalResponse,
 } from "../index.js"
 
 /**
@@ -18,7 +22,7 @@ export async function abstract(
 	id: string
 ) {
 	const url = `${this._url}/abstract/${idType}/${id}`
-	return this._fetch<AbstractRetrievalResponse>("GET", url)
+	return this._fetch<AbstractRetrievalResponse.RootObject>("GET", url)
 }
 
 /**
@@ -34,7 +38,7 @@ export async function affiliation(
 	id: string
 ) {
 	const url = `${this._url}/affiliation/${idType}/${id}`
-	return this._fetch<unknown>("GET", url)
+	return this._fetch<AffiliationRetrievalResponse.RootObject>("GET", url)
 }
 
 /**
@@ -50,7 +54,7 @@ export async function articleEntitlement(
 	id: string
 ) {
 	const url = `${this._url}/article/entitlement/${idType}/${id}`
-	return this._fetch<EntitlementResponse>("GET", url)
+	return this._fetch<ArticleEntitlementRetrievalResponse.RootObject>("GET", url)
 }
 
 /**
@@ -66,7 +70,7 @@ export async function article(
 	id: string
 ) {
 	const url = `${this._url}/article/${idType}/${id}`
-	return this._fetch<unknown>("GET", url)
+	return this._fetch<ArticleRetrievalResponse.RootObject>("GET", url)
 }
 
 /**
@@ -82,7 +86,7 @@ export async function author(
 	id: string
 ) {
 	const url = `${this._url}/author/${idType}/${id}`
-	return this._fetch<AuthorRetrievalResponse>("GET", url)
+	return this._fetch<AuthorRetrievalResponse.RootObject>("GET", url)
 }
 
 /**
@@ -96,7 +100,11 @@ export async function engineeringVillageRecord(
 	docId: string
 ) {
 	const url = `${this._url}/ev/records`
-	return this._fetch<unknown>("GET", url, { docId })
+	return this._fetch<EngineeringVillageRecordRetrievalResponse.RootObject>(
+		"GET",
+		url,
+		{ docId }
+	)
 }
 
 /**
@@ -112,7 +120,7 @@ export async function object(
 	id: string
 ) {
 	const url = `${this._url}/object/${idType}/${id}`
-	return this._fetch<unknown>("GET", url)
+	return this._fetch<ObjectRetrievalResponse.RootObject>("GET", url)
 }
 
 /**

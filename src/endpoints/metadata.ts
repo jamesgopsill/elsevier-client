@@ -1,4 +1,11 @@
-import type { ElsevierClient, SerialTitleQueryParams } from "../index.js"
+import type {
+	CitationCountResponse,
+	CitationsOverviewResponse,
+	ElsevierClient,
+	NonSerialTitleResponse,
+	SerialTitleQueryParams,
+	SerialTitleResponse,
+} from "../index.js"
 
 /**
  * Abstract Citation Count API retrieves Cited by in Scopus image given one of the article identifiers (DOI, PII, pubmed_ID) passed in as query parameter. Optionally, an arbitrary combination of applicable ISSN, ISBN, volume, issue, title, page parameters can be provided to identify the article.
@@ -15,7 +22,7 @@ export async function citationCount(
 	const url = `${this._url}/abstract/citation-count`
 	let params: any = {}
 	params[idType] = id
-	return this._fetch<undefined>("GET", url, params)
+	return this._fetch<CitationCountResponse.RootObject>("GET", url, params)
 }
 
 /**
@@ -33,7 +40,7 @@ export async function citedBy(
 	const url = `${this._url}/abstract/citations`
 	let params: any = {}
 	params[idType] = id
-	return this._fetch<unknown>("GET", url, params)
+	return this._fetch<CitationsOverviewResponse.RootObject>("GET", url, params)
 }
 
 /**
@@ -56,7 +63,7 @@ export async function nonSerialTitle(
 		isbn,
 		subj,
 	}
-	return this._fetch<unknown>("GET", url, params)
+	return this._fetch<NonSerialTitleResponse.RootObject>("GET", url, params)
 }
 
 /**
@@ -70,7 +77,7 @@ export async function nonSerialTitleByISBN(
 	isbn: string = ""
 ) {
 	const url = `${this._url}/nonserial/title/isbn/${isbn}`
-	return this._fetch<unknown>("GET", url)
+	return this._fetch<NonSerialTitleResponse.RootObject>("GET", url)
 }
 
 /**
@@ -84,7 +91,7 @@ export async function serialTitle(
 	query: SerialTitleQueryParams
 ) {
 	const url = `${this._url}/serial/title`
-	return this._fetch<unknown>("GET", url, query)
+	return this._fetch<SerialTitleResponse.RootObject>("GET", url, query)
 }
 
 /**
@@ -98,5 +105,5 @@ export async function serialTitleByISSN(
 	issn: string = ""
 ) {
 	const url = `${this._url}/serial/title/issn/${issn}`
-	return this._fetch<unknown>("GET", url)
+	return this._fetch<SerialTitleResponse.RootObject>("GET", url)
 }
