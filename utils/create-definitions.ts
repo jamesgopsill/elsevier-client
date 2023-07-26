@@ -1,5 +1,5 @@
-import { writeFileSync } from "fs"
 import { json2ts } from "json-ts"
+import { writeFileSync } from "node:fs"
 
 const urls = {
 	SearchScienceDirectResponse:
@@ -36,11 +36,13 @@ const urls = {
 		"https://dev.elsevier.com/payloads/metadata/serialTitleSearchResp.json",
 }
 
+/*
 const dashedKey = (s) => {
 	s = s.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)
 	s = s.substring(1)
 	return s
 }
+*/
 
 let interfaces = ""
 

@@ -1,12 +1,16 @@
+import assert from "node:assert"
+import test, { before, describe } from "node:test"
 import { ElsevierClient } from "../src/index.js"
 import { auth } from "./test.config.js"
 
-let c: ElsevierClient
+describe(`Ping`, { concurrency: 2 }, () => {
+	let c: ElsevierClient
 
-beforeAll(() => {
-	c = new ElsevierClient(auth.apiKey)
-})
+	before(() => {
+		c = new ElsevierClient(auth.apiKey)
+	})
 
-test(`ping`, () => {
-	expect(c.ping()).toEqual("pong")
+	test(`ping`, () => {
+		assert.strictEqual(c.ping(), "pong")
+	})
 })
